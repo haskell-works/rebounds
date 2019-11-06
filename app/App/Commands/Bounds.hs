@@ -8,17 +8,21 @@ module App.Commands.Bounds
   ) where
 
 import Control.Lens
+import Control.Monad
 import Data.Generics.Product.Any
 import Options.Applicative       hiding (columns)
 
 import qualified App.Commands.Types as Z
 import qualified Data.Text          as T
+import qualified Data.Text.IO       as TIO
 import qualified System.IO          as IO
 
 runBounds :: Z.BoundsOptions -> IO ()
 runBounds opts = do
   let inputFile = opts ^. the @"inputFile"
-  IO.putStrLn $ "Input file: " <> inputFile
+  contents <- TIO.readFile inputFile
+  forM_ (T.lines contents) $ \line -> do
+    TIO.putStrLn line
   return ()
 
 optsBounds :: Parser Z.BoundsOptions
