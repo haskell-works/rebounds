@@ -21,11 +21,15 @@ source-repository head
   type: git
   location: https://github.com/haskell-works/rebounds
 
-common base                 { build-depends: base                 >= 4          && < 5      }
+common base                     { build-depends: base                     >= 4          && < 5      }
 
-common hedgehog             { build-depends: hedgehog             >= 0.5        && < 1.1    }
-common hspec                { build-depends: hspec                >= 2.4        && < 2.8    }
-common hw-hspec-hedgehog    { build-depends: hw-hspec-hedgehog    >= 0.1        && < 0.2    }
+common generic-lens             { build-depends: generic-lens             >= 1.2.0.1    && < 1.3    }
+common hedgehog                 { build-depends: hedgehog                 >= 0.5        && < 1.1    }
+common hspec                    { build-depends: hspec                    >= 2.4        && < 2.8    }
+common hw-hspec-hedgehog        { build-depends: hw-hspec-hedgehog        >= 0.1        && < 0.2    }
+common lens                     { build-depends: lens                     >= 4          && < 5      }
+common optparse-applicative     { build-depends: optparse-applicative     >= 0.14       && < 0.16   }
+common text                     { build-depends: text                     >= 1.2        && < 1.3    }
 
 common config
   default-language:     Haskell2010
@@ -43,9 +47,17 @@ library
 
 executable rebounds
   import:               base, config
+                      , generic-lens
+                      , lens
+                      , text
+                      , optparse-applicative
                       , rebounds
   hs-source-dirs:       app
   main-is:              Main.hs
+  ghc-options:          -threaded -rtsopts -with-rtsopts=-N
+  other-modules:        App.Commands
+                        App.Commands.Bounds
+                        App.Commands.Types
 
 test-suite rebounds-test
   import:               base
