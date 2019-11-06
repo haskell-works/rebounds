@@ -1,0 +1,2 @@
+module HaskellWorks.Rebounds
+  () where
