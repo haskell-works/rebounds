@@ -28,6 +28,7 @@ common hedgehog                 { build-depends: hedgehog                 >= 0.5
 common hspec                    { build-depends: hspec                    >= 2.4        && < 2.8    }
 common hw-hspec-hedgehog        { build-depends: hw-hspec-hedgehog        >= 0.1        && < 0.2    }
 common lens                     { build-depends: lens                     >= 4          && < 5      }
+common megaparsec               { build-depends: megaparsec               >= 8          && < 9      }
 common optparse-applicative     { build-depends: optparse-applicative     >= 0.14       && < 0.16   }
 common text                     { build-depends: text                     >= 1.2        && < 1.3    }
 
@@ -40,6 +41,8 @@ common rebounds
 library
   import:               base
                       , config
+                      , megaparsec
+                      , text
   exposed-modules:      HaskellWorks.Rebounds
   other-modules:        Paths_rebounds
   autogen-modules:      Paths_rebounds
@@ -49,9 +52,10 @@ executable rebounds
   import:               base, config
                       , generic-lens
                       , lens
-                      , text
+                      , megaparsec
                       , optparse-applicative
                       , rebounds
+                      , text
   hs-source-dirs:       app
   main-is:              Main.hs
   ghc-options:          -threaded -rtsopts -with-rtsopts=-N
@@ -68,7 +72,8 @@ test-suite rebounds-test
                       , rebounds
   type:                 exitcode-stdio-1.0
   main-is:              Spec.hs
-  other-modules:        Paths_rebounds
+  other-modules:        HaskellWorks.ReboundsSpec
+                        Paths_rebounds
   autogen-modules:      Paths_rebounds
   build-depends:        rebounds
   hs-source-dirs:       test
