@@ -68,8 +68,6 @@ test-suite rebounds-test
                       , rebounds
   type:                 exitcode-stdio-1.0
   main-is:              Spec.hs
-  other-modules:        Paths_rebounds
-  autogen-modules:      Paths_rebounds
   build-depends:        rebounds
   hs-source-dirs:       test
   ghc-options:          -threaded -rtsopts -with-rtsopts=-N
