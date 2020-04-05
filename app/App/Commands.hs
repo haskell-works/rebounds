@@ -3,7 +3,6 @@ module App.Commands
   ) where
 
 import App.Commands.Bounds
-import Data.Semigroup      ((<>))
 import Options.Applicative
 
 commands :: Parser (IO ())
